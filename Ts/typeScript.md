@@ -151,4 +151,155 @@ newState.set("João");
 newState.set(123);
 ```
 
+## Type
+Para não ficar sempre repetindo os tipos para todas as variáveis podemos criar Types para cada uma delas.
+
+Veja o exemplo a seguir:
+```ts
+type IdType = string | number | undefined;
+
+let userId: IdType;
+let adminId: IdType;
+
+userId = 1;
+userId = '1';
+userId = undefined;
+
+adminId = 1;
+adminId = '2';
+adminId = undefined;
+```
+
+## Type Assertions
+Asserção de tipo normalmente é utilizado quando o TypeScript não sabe qual é a tipagem em um determinado objeto.
+
+Para contornarmos isso, podemos criar um type informando quais são as propriedades desse objeto.
+```ts
+type UserResponse = {
+    id: number;
+    name: string;
+    avatar: string;
+}
+
+let userResponse = {} as UserResponse;
+```
+
+## Objetos
+Nessa aula vamos aprendemos como criar tipagens utilizando objetos no TypeScript.
+
+Segue o exemplo:
+```ts
+type Point = {
+    x: number;
+    y: number;
+}
+
+function printCoord(points: Point) {
+    console.log(`O eixo x é: ${points.x}`)
+    console.log(`O eixo y é: ${points.y}`)
+}
+
+printCoord({x: 101, y: 50})
+Resultado do log:
+
+[LOG]: "O eixo x é: 101"
+------------------------
+[LOG]: "O eixo y é: 50"
+```
+## Opcional
+Para informamos que uma propriedade é opcional inserimos o sinal de ?
+
+Veja o exemplo:
+```ts
+type User = {
+    name: string;
+    email: string;
+    age: number;
+    isAdmin?: boolean; // isAdmin não será obrigatória na sua declaração
+}
+
+let newUser: User = {
+    name: 'João',
+    email: 'joao@email.com',
+    age: 18
+}
+```
+
+## Intersecção de tipos
+A intersecção de tipos como o próprio nome já diz, podemos unir dois tipos e usar as suas propriedades dentro de um objeto.
+
+Segue o exemplo abaixo:
+```ts
+type User = {
+    id: number,
+    name: string,
+}
+
+type Char = {
+    nickname: string,
+    level: number
+}
+
+type PlayerInfo = User & Char;
+
+let info: PlayerInfo = {
+    id: 1,
+    name: 'João Inácio',
+    nickname: 'birobirobiro',
+    level: 50
+}
+```
+## Interface
+Outra maneira de criar tipagens no TypeScript é utilizando a interface .
+
+Segue o exemplo:
+```ts
+interface User {
+    id: number
+    name: string,
+}
+
+let newUser: User = {
+    id: 1,
+    name: "João"
+}
+
+function registerNewUser(newUser: User){
+    newUser.id
+    newUser.name
+}
+```
+
+## Type e Interface
+Descrição
+Type e Interface
+O objetivo de ambos serve para definir tipagens no TypeScript. O type é mais recomendado por ser mais simples, fácil de lidar com tipos primitivos, por ser mais flexível. Já as interfaces são utilizadas normalmente em criação de libs, para aqueles que gostam da programação orientada a objetos.
+
+O exemplo abaixo mostra a diferença na sintaxe e união entre type e inteface:
+```ts
+type TUser = {
+    id: number;
+    name: string;
+}
+
+type TPayment = {
+    method: string;
+}
+
+// Fazendo união com Type
+type TAccount = TUser & TPayment
+
+interface IUser {
+    id: number;
+    name: string;
+}
+
+interface IPayment {
+    method: string;
+}
+
+// Fazendo união com interfaces
+interface IAccount extends IUser, IPayment {}
+```
+
 
